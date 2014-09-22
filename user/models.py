@@ -12,6 +12,7 @@ class User(models.Model):
 	city = models.CharField(max_length=30)
 	country = models.CharField(max_length=30)
 	state = models.CharField(max_length=30)
+	zipcode = models.IntegerField(null=True)
 
 	member_since = models.DateField(auto_now_add=True)
 	#picture = models.ImageField(height_field=) figure this out!!!!
@@ -22,7 +23,3 @@ class User(models.Model):
 
 
 
-
-
-
-# Create your models here.
