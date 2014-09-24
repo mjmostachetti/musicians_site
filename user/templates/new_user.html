@@ -3,9 +3,11 @@
 
 {% block form_content %}
 
-<form action="/new_user/" method="POST">
-	{% csrf_token %}
-	{{ form }}
+<form role="form" action="/new_user/" method="POST">
+	<div class="form-group">
+		{% csrf_token %}
+		{{ form }}
+	</div>
 	<input type="submit" value="Submit"/>
 </form>
 

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://localhost:8000/new_user/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>Find your local Musicians</title>
+	<link href="http://localhost:8000/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="http://localhost:8000/static/base.css" rel="stylesheet" media="screen">
+	<style>
+		
+		
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			
+	    	<button id="signin" scr="../static/persona-only-signin-link.png">
+	    	<img src="./Find your local Musicians_files/persona-only-signin-link.png" alt="Smiley face" id="signin">
+		</button></div>
+	</div>
+
+	    
+
+
+	    <div class="row">
+	    	<div class="col">
+				<ul class="nav nav-tabs" role="tablist">
+			  		<li class="active"><a href="http://localhost:8000/new_user/#">Home</a></li>
+			 		<li><a href="http://localhost:8000/profile/">Profile</a></li>
+			  		<li><a href="./Find your local Musicians_files/Find your local Musicians.html">New User</a></li>
+			  		<li><a href="http://localhost:8000/map/">Map</a></li>
+			  		<li><a href="http://localhost:8000/messages/">Messages</a></li>
+			  		<li><a href="http://localhost:8000/about/">About</a></li>
+			  		<li><a href="http://localhost:8000/donate/">Donate</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="map_canvas"></div>
+		
+		
+
+<form action="./Find your local Musicians_files/Find your local Musicians.html" method="POST">
+	<input type="hidden" name="csrfmiddlewaretoken" value="Fme9AGQWdak1fU1hNKDzLkQMposUPSk4">
+	<label for="id_first_name">First name:</label><input id="id_first_name" maxlength="30" name="first_name" type="text">
+<label for="id_last_name">Last name:</label><input id="id_last_name" maxlength="30" name="last_name" type="text">
+<label for="id_instrument">Instrument:</label><input id="id_instrument" maxlength="30" name="instrument" type="text">
+<label for="id_email_address">Email address:</label><input id="id_email_address" maxlength="70" name="email_address" type="text">
+<label for="id_bio">Bio:</label><textarea cols="40" id="id_bio" name="bio" rows="10"></textarea>
+<label for="id_website">Website:</label><input id="id_website" maxlength="200" name="website" type="url">
+<label for="id_link_to_music">Link to music:</label><input id="id_link_to_music" maxlength="100" name="link_to_music" type="url">
+<label for="id_city">City:</label><input id="id_city" maxlength="30" name="city" type="text">
+<label for="id_country">Country:</label><input id="id_country" maxlength="30" name="country" type="text">
+<label for="id_state">State:</label><input id="id_state" maxlength="30" name="state" type="text">
+<label for="id_zipcode">Zipcode:</label><input id="id_zipcode" min="0" name="zipcode" type="number">
+<label for="id_birthday">Birthday:</label><input id="id_birthday" name="birthday" type="text">
+	<input type="submit" value="Submit">
+</form>
+
+<!--
+
+<form role="form" action="" method="POST"> 
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputFile">File input</label>
+    <input type="file" id="exampleInputFile">
+    <p class="help-block">Example block-level help text here.</p>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+-->
+
+
+
+		
+
+		<script src="./Find your local Musicians_files/jquery.min.js"></script>
+		<script src="./Find your local Musicians_files/include.js"></script>
+		
+		<script>
+			
+			var signinLink = document.getElementById('signin');
+			if (signinLink) {
+			  signinLink.onclick = function() { navigator.id.request(); };
+			}
+
+			var signoutLink = document.getElementById('signout');
+			if (signoutLink) {
+			  signoutLink.onclick = function() { navigator.id.logout(); };
+			}
+
+			var currentUser = null;
+
+			navigator.id.watch({
+			  loggedInUser: currentUser,
+			  onlogin: function(assertion) {
+			    // A user has logged in! Here you need to:
+			    // 1. Send the assertion to your backend for verification and to create a session.
+			    // 2. Update your UI.
+			    $.ajax({ /* <-- This example uses jQuery, but you can use whatever you'd like */
+			      type: 'POST',
+			      url: '/auth/login', // This is a URL on your website.
+			      data: {assertion: assertion},
+			      success: function(res, status, xhr) { window.location.reload(); },
+			      error: function(xhr, status, err) {
+			        navigator.id.logout();
+			        alert("Login failure: " + err);
+			      }
+			    });
+			  },
+			  onlogout: function() {
+			    // A user has logged out! Here you need to:
+			    // Tear down the user's session by redirecting the user or making a call to your backend.
+			    // Also, make sure loggedInUser will get set to null on the next page load.
+			    // (That's a literal JavaScript null. Not false, 0, or undefined. null.)
+			    $.ajax({
+			      type: 'POST',
+			      url: '/auth/logout', // This is a URL on your website.
+			      success: function(res, status, xhr) { window.location.reload(); },
+			      error: function(xhr, status, err) { alert("Logout failure: " + err); }
+			    });
+			  }
+			});
+		</script><iframe src="./Find your local Musicians_files/communication_iframe.html" style="display: none;"></iframe>
+	
+
+</body></html>

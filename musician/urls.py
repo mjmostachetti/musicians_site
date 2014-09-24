@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     url(r'^new_user/', 'user.views.new_user', name='new_user'),
     url(r'^messages/', 'user.views.messages', name='messages'),
     url(r'^about/', 'user.views.about', name='about'),
-    #url(r'^admin/', include(admin.site.urls)),
+    url(r'^donate/', 'user.views.donate', name='donate'),
+    url(r'^admin/', include(admin.site.urls)),
 )

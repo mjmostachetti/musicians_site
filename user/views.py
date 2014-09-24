@@ -20,10 +20,11 @@ def new_user(request):
 	if request.method == 'POST':
 		form = UserForm(request.POST)
 		if form.is_valid():
+			#user_ = User.objects.create()
+			form.save()#for_user=user_)
 			return HttpResponseRedirect('/profile/')
 	else:
 		form = UserForm()
-
 	return render(request, 'new_user.html', {'form' : form})
 
 def messages(request):
@@ -31,5 +32,10 @@ def messages(request):
 
 def about(request):
 	return render(request, 'about.html')
+
+def donate(request):
+	return render(request, 'donate.html')
+
+
 
 
