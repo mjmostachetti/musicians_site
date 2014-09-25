@@ -33,6 +33,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 {% endblock %}
 
+{% block form_content %}
+<form method="get" action="/search/">
+  Search Users:<input type="text" name="city" id="id_q" placeholder="What city do you want to search" value="{{ query }}"/>
+  <input type="submit" value="Search" />
+</form>
+{% endblock %}
+
 
 {% block bootstrap_content %}
 <div class="dropdown center-block">

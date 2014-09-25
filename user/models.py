@@ -15,15 +15,19 @@ class User(models.Model):
 	website = models.URLField(max_length=200)
 	link_to_music = models.URLField(max_length=100)
 	city = models.CharField(max_length=30)
-	country = models.CharField(max_length=30)
 	state = models.CharField(max_length=30)
+	country = models.CharField(max_length=30)
 	zipcode = models.PositiveIntegerField(null=True)
 	birthday = models.DateField(auto_now=False, auto_now_add=False, null=True)
 
-	#member_since = models.DateField(auto_now_add=True)
-	#picture = models.ImageField(height_field=) figure this out!!!!
-	#age = models.IntegerField()
-	#genra_looking_for = models.dropdown list?
+	def __str__(self):
+		return self.first_name + " " + self.last_name
+
+	# last login time
+	# member_since = models.DateField(auto_now_add=True)
+	# picture = models.ImageField(height_field=) figure this out!!!!
+	# age = models.IntegerField()
+	# genra_looking_for = models.dropdown list?
 
 
 class Instrument(models.Model):

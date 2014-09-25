@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+<form method="get" action="/search/">
+  What city do you want to search for?<br><input type="text" name="city" id="id_q" value="{{ query }}"/>
+  <input type="submit" value="Search" />
+</form>
+{% endblock %}

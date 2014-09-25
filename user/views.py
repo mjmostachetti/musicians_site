@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
 from user.models import User
+from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from user.forms import UserForm
+from django.shortcuts import render_to_response
 import datetime
 
 
@@ -35,6 +37,27 @@ def about(request):
 
 def donate(request):
 	return render(request, 'donate.html')
+
+def splash(request):
+	return render(request, 'splash.html')
+	#login page
+
+def search_city_state(request, user_state, user_city):
+    users_in_city = User.objects.filter(
+    	city = user_city,
+    	state = user_state,
+    )
+    return HttpResponse(users_in_city)
+
+def all_users(request):
+	list_all = User.objects.all()
+	output = ', '.join([p.city for p in list_all])
+	return HttpResponse(output)
+
+# search for users in the desired city and state
+#def search_city_state(request, city, state):
+
+
 
 
 

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>Welcome to </title>
+	<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="/static/base.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			{% block body_fill %}{% endblock %}
+	    	<button id='signin' scr='../static/persona-only-signin-link.png'>
+	    	<img src="../static/persona-only-signin-link.png" alt="Smiley face" id="signin">
+		</div>
+	</div>
+
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="https://login.persona.org/include.js"></script>
+	<script>
+		var signinLink = document.getElementById('signin');
+		if (signinLink) {
+		  signinLink.onclick = function() { navigator.id.request(); };
+		}
+
+		var signoutLink = document.getElementById('signout');
+		if (signoutLink) {
+		  signoutLink.onclick = function() { navigator.id.logout(); };
+		}
+
+		var currentUser = '{{ user.email }}' || null;
+		var csrf_token = '{{ csrf_token }}';
+		console.log(currentUser);
+
+		navigator.id.watch({
+		  loggedInUser: currentUser,
+		  onlogin: function(assertion) {
+		    // A user has logged in! Here you need to:
+		    // 1. Send the assertion to your backend for verification and to create a session.
+		    // 2. Update your UI.
+		    $.ajax({ /* <-- This example uses jQuery, but you can use whatever you'd like */
+		      type: 'POST',
+		      url: '/auth/login', // This is a URL on your website.
+		      data: {assertion: assertion},
+		      success: function(res, status, xhr) { window.location.reload(); },
+		      error: function(xhr, status, err) {
+		        navigator.id.logout();
+		        alert("Login failure: " + err);
+		      }
+		    });
+		  },
+		  onlogout: function() {
+		    // A user has logged out! Here you need to:
+		    // Tear down the user's session by redirecting the user or making a call to your backend.
+		    // Also, make sure loggedInUser will get set to null on the next page load.
+		    // (That's a literal JavaScript null. Not false, 0, or undefined. null.)
+		    $.ajax({
+		      type: 'POST',
+		      url: '/auth/logout', // This is a URL on your website.
+		      success: function(res, status, xhr) { window.location.reload(); },
+		      error: function(xhr, status, err) { alert("Logout failure: " + err); }
+		    });
+		  }
+		});
+	</script>
+</body>
+
+
